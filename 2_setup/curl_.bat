@@ -1,0 +1,2 @@
+set json="{\"method\":\"%1\",\"params\":[],\"id\":1,\"chain_name\":\"chain1\"}"
+curl -X POST -H "Content-Type: application/json" --user multichainrpc:52TH6uU5onYPrwGoZzMittjoEjg9iZS6rDi8i3aVQjNi --data %json% http://localhost:1234

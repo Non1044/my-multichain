@@ -1,0 +1,3 @@
+set addr0=1TFarWGnm9aQiSg7USqWiiAN8QFdNNVVpeAp3Y
+set addr1=1GnHk3wqdE1tSAP311oNh2kHjXjFCNYnmsCPod
+set addr2=1FZacFxZkcHR4yC4uDfJs23wgkTd9vnXNSYLTk

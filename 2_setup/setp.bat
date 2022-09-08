@@ -1,0 +1,1 @@
+set PATH=%PATH%;C:\Users\Non\Desktop\mymultichain\multichaind.exe;C:\Users\Non\Desktop\mymultichain\2_setup

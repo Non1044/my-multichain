@@ -1,0 +1,1 @@
+python rm_mcdir.py

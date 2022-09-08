@@ -1,0 +1,70 @@
+<html>
+<body>
+
+<h1>Prepare</h1>  
+<p/>
+<form action="/prepare" method="POST">
+Admin Password <input type="text" name="pwd"/>
+<input type="submit" value="Prepare"/>
+</form> <p/>
+
+<h2>Verify Admin Password</h2> 
+<form action="/verifyadminpwd" method="POST">
+Admin Password <input type="text" name="pwd"/>
+<input type="submit" value="verify"/>
+</form>
+
+<h2>Verify Eligible User</h2> 
+<form action="/verifyeligible" method="POST">
+Name <input type="text" name="name"/>
+<input type="submit" value="verify"/>
+</form>
+
+<h2>Verify Registered User</h2> 
+<form action="/verifyregistered" method="POST">
+Name <input type="text" name="name"/>
+<input type="submit" value="verify"/>
+</form>
+
+--------------------------------------------------------<p/>
+
+<h1>Register User</h1>
+<p/>
+<form action="/registeruser" method="POST">
+Name <input type="text" name="name"/>
+<input type="submit" value="Register"/>
+</form>
+
+<h2>Verify User Password</h2> 
+<form action="/verifyuserpwd" method="POST">
+Name <input type="text" name="name"/>
+Password <input type="text" name="pwd"/>
+<input type="submit" value="verify"/>
+</form>
+
+--------------------------------------------------------<p/>
+
+<h1>Send Transfer Tx</h1>
+<p/>
+<form action="/sendtransfertx" method="POST">
+Date <input type="text" name="date"/> <p/>
+Source <input type="text" name="src"/> <p/>
+Target <input type="text" name="target"/> <p/>
+Amount <input type="text" name="amount"/> 
+<input type="submit" value="Send"/>
+</form>
+
+--------------------------------------------------------<p/>
+
+<h1>Send Consum Tx</h1>
+<p/>
+<form action="/sendconsumtx" method="POST">
+Date <input type="text" name="date"/> <p/>
+Consumer <input type="text" name="consumer"/> <p/>
+Energy type <input type="text" name="etype"/> <p/>
+Amount <input type="text" name="amount"/> 
+<input type="submit" value="Send"/>
+</form>
+
+</body>
+</html>

@@ -1,0 +1,78 @@
+## https://www.multichain.com/getting-started/
+
+Install:
+Unzip multichain-windows-2.x.x.zip to
+	 D:\mymultichain\multichain.2.x.x
+
+Set PATH:
+   D:\mymultichain\multichain-windows-2.x.x
+   D:\mymultichain\src\0_startup
+setp.bat
+
+Create 'chain1' Blockchain:
+cr_chain1.bat
+	multichain-util create chain1
+
+By default the data directory for 'chain1' is created at: (mc_dir)
+	C:\Users\<user_name>\AppData\Roaming\MultiChain.
+The data directory may be specified with option:
+	multichain-util create chain2 -datadir=.\data\
+
+There are multichain.conf in 'mc_dir' and 'mc_dir\chain1'
+The rpcpassword is randomly set.
+The rpcport will be randomly set when started.
+
+
+Copy multichain.conf to dir:
+	%USR%\AppData\Roaming\MultiChain\chain1
+python cp_conf.py
+
+Start chain1 daemon:
+	start multichaind chain1 -daemon
+startd.bat
+'chain1' is started and the genesis block is created.
+Its ip and port are shown.
+
+Using multichain-cli: The multichaind must be running.
+	multichain-cli chain1 %1 %2 %3 %4 %5 %6
+   ex.  multichain-cli chain1 getinfo
+mc.bat getinfo
+   
+-------------------------------------------------------
+
+Test:
+mc ping
+mc getpeerinfo
+mc getruntimeparams
+mc getinfo
+
+Help: multichain-cli chain1 help <cmd>
+mc help
+mc help getinfo
+
+Stop and Remove mc_dir:
+	%USR%\AppData\Roaming\MultiChain
+mc stop
+python rm_mcdir.py
+
+Reset mc_dir:
+reset.py
+
+----------------------------------------------------
+
+## Other nodes may connect at chain1@xxx.yyy.a.bb:PPPP
+## And listening for API requests at port PPP(P-1). (local only)
+
+Check multichain.conf for rpcuser and rpcpassword
+add:   rpcport=WXYZ
+
+Connect to 'chain1' from the second node:
+multichaind chain1@xxx.yyy.a.bb:PPPP
+
+The first time connection would fail because of no permission yet.
+The address of the second node is shown. (save as 'add2')
+
+To grant the 'connect' permission:
+multichain-cli chain1 grant %add2% connect
+
+Then try to connect again.
