@@ -15,6 +15,7 @@ def perpare():
    adminpwd = request.form['pwd']
    if not is_valid_pwd(adminpwd):
       return {'result': 'error', 'msg': 'Invalid password' }
+   
    # create 'energy' stream
    r = api.create('stream', 'energy', True)
    try:
@@ -93,6 +94,22 @@ def send_consum_tx():
         {'date': date, 'cons': cons, 'etype': etype, 'amount': amount}})
     return {'result': 'success', 'txid': txid }
 
+@app.route('/sendtransfertx', methods=['POST'])
+def send_transfer_tx():
+    try:
+        date = request.form['date']
+        trans = request.form['trans']
+        pwd = request.form['pwd']
+        target = request.form['target']
+        amount = request.form['amount']
+    except:
+        return {'result': 'error', 'msg': 'Invalid parameter' }
+    if (not is_registered(trans)) or (not is_valid_user_pwd(trans, pwd)):
+        return {'result': 'error', 'msg': 'Invalid consumer' }
+    txid = api.publish('energy', 'transfer', {'json': \
+        {'date': date, 'trans': trans, 'target': target, 'amount': amount}})
+    return {'result': 'success', 'txid': txid }
+
 @app.route('/querycons', methods=['POST'])
 def query_cons(): # By date or etype
     try:
@@ -100,6 +117,22 @@ def query_cons(): # By date or etype
         etype = request.form.get('etype')
         a = []
         for j in api.liststreamkeyitems('energy', 'consum'):
+           s = j['data']['json']
+           if (etype == None  and date == s['date']) or \
+              (date == None  and etype == s['etype']) or \
+              (date == s['date']  and etype == s['etype']):
+               a.append(str(s))
+    except:
+        return {'result': 'error', 'msg': 'Invalid parameter' }
+    return {'result': 'success', 'value': str(a)}
+
+@app.route('/querytrans', methods=['POST'])
+def query_trans(): # By date or etype
+    try:
+        date = request.form.get('date')
+        etype = request.form.get('etype')
+        a = []
+        for j in api.liststreamkeyitems('energy', 'transfer'):
            s = j['data']['json']
            if (etype == None  and date == s['date']) or \
               (date == None  and etype == s['etype']) or \
@@ -162,9 +195,6 @@ def query_duration():
 
 #----------------------------------------------------------------
 
-
-#เขียนเพิ่ม
-
 @app.route('/SendConsumTx',methods=['GET','POST'])
 def index1():
     return render_template("Send Consum Tx.html")
@@ -181,6 +211,6 @@ def index3():
 #---------------------------------------
 
 if __name__ == '__main__':
-    app.run(port=1234, debug=True)
+    app.run(port=8080, debug=True)
 
 
