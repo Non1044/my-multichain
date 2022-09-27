@@ -1,1 +1,3 @@
 "# my-multichain" 
+test
+local
