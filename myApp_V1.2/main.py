@@ -207,6 +207,10 @@ def index2():
 def index3():
     return render_template("Register User.html")
 
+@app.route('/Dashboard',methods=['get','post'])
+def index4():
+    return render_template("dashboard.html")
+
 
 #---------------------------------------
 
